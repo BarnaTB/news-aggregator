@@ -22,7 +22,7 @@ class Settings(BaseSettings):
         "REDDIT_TIMEFRAME", default="all", required=True)
     reddit_base_url: str = get_env_variable("REDDIT_BASE_URL", required=False)
     newsapi_base_url: str = get_env_variable("NEWSAPI_BASE_URL", required=False)
-    lru_cache: int = get_env_variable("LRU_CACHE", default=10)
-    maximum_lru_cache: int = get_env_variable("MAXIMUM_LRU_CACHE", default=4)
+    lru_cache_expiry: int = get_env_variable("LRU_CACHE_EXPIRY", default=10)
+    maximum_cache_size: int = get_env_variable("MAXIMUM_CACHE_SIZE", default=4)
 
 settings = Settings()

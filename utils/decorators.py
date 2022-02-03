@@ -1,8 +1,12 @@
 from functools import lru_cache, wraps
 from datetime import datetime, timedelta
 
+from main.settings import settings
 
-def lru_cache_with_expiry(seconds: int, maxsize: int = 4):
+
+def lru_cache_with_expiry(
+    seconds: int=settings.lru_cache_expiry,
+    maxsize: int=settings.maximum_cache_size):
     """Function decorator to set an expiry to the cache in memory
     """
     def wrapper_cache(func):

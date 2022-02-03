@@ -9,6 +9,8 @@ logger = logging.getLogger("uvicorn")
 
 
 class Settings(BaseSettings):
+    """Settings class to expose environment variables globally
+    """
     other_api_urls: str = get_env_variable("NEWS_API_URLS", default="")
     other_api_query_keys: str = get_env_variable("OTHER_API_QUERY_KEYS", default="")
     newsapi_key: str = get_env_variable("NEWSAPI_KEY", required=True)
@@ -20,5 +22,7 @@ class Settings(BaseSettings):
         "REDDIT_TIMEFRAME", default="all", required=True)
     reddit_base_url: str = get_env_variable("REDDIT_BASE_URL", required=False)
     newsapi_base_url: str = get_env_variable("NEWSAPI_BASE_URL", required=False)
+    lru_cache: int = get_env_variable("LRU_CACHE", default=10)
+    maximum_lru_cache: int = get_env_variable("MAXIMUM_LRU_CACHE", default=4)
 
 settings = Settings()

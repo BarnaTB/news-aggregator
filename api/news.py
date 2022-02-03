@@ -6,6 +6,8 @@ from main.settings import settings
 
 from utils.core import get_env_variable
 from utils.news import format_data
+from utils.decorators import lru_cache_with_expiry
+
 
 router = APIRouter(
     tags=["news"],
@@ -13,8 +15,16 @@ router = APIRouter(
     include_in_schema=True
 )
 
+@lru_cache_with_expiry
 @router.get("/news")
 def get_news(query: str = ""):
+    """View endpoint to fetch/search news from reddit, newsapi and 
+    any optional third party APIs set by the user via environment 
+    variables
+
+    Args:
+        query[str]: Optional
+    """
     subreddit_url = (
         f"{settings.reddit_base_url}/r/news/"
         f"{settings.reddit_listing}.json"

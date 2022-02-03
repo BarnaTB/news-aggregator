@@ -1,6 +1,5 @@
 from main.settings import settings
 
-
 def format_data(data: list) -> tuple:
     """Helper function to reformat the response data from all APIs
 

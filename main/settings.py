@@ -9,7 +9,6 @@ logger = logging.getLogger("uvicorn")
 
 
 class Settings(BaseSettings):
-    debug: bool = get_env_variable("DEBUG", 1, required=True)
     other_api_urls: str = get_env_variable("NEWS_API_URLS", default="")
     other_api_query_keys: str = get_env_variable("OTHER_API_QUERY_KEYS", default="")
     newsapi_key: str = get_env_variable("NEWSAPI_KEY", required=True)
@@ -19,5 +18,7 @@ class Settings(BaseSettings):
         "REDDIT_LISTING", default="new", required=False)
     reddit_timeframe: str = get_env_variable(
         "REDDIT_TIMEFRAME", default="all", required=True)
+    reddit_base_url: str = get_env_variable("REDDIT_BASE_URL", required=False)
+    newsapi_base_url: str = get_env_variable("NEWSAPI_BASE_URL", required=False)
 
 settings = Settings()

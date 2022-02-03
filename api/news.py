@@ -14,16 +14,22 @@ router = APIRouter(
 )
 
 @router.get("/news")
-def get_news():
+def get_news(query: str = ""):
     subreddit_url = (
-        f"https://www.reddit.com/r/news/"
+        f"{settings.reddit_base_url}/r/news/"
         f"{settings.reddit_listing}.json"
         f"?limit={settings.reddit_data_limit}"
         f"&t={settings.reddit_timeframe}"
+        ) if not query else (
+            f"{settings.reddit_base_url}/r/news/search"
+            f"{settings.reddit_listing}.json?q={query}"
         )
     newsapi_url = (
-        "https://newsapi.org/v2/top-headlines?category=general"
+        f"{settings.newsapi_base_url}/v2/top-headlines?category=general"
         f"&apiKey={settings.newsapi_key}"
+        ) if not query else (
+            f"{settings.newsapi_base_url}/v2/everything?q={query}"
+            f"&apiKey={settings.newsapi_key}"
         )
     apis = [subreddit_url, newsapi_url]
     environment_set_urls = settings.other_api_urls.split(" ") if settings.other_api_urls else ""
@@ -39,8 +45,3 @@ def get_news():
     }
 
     return response["message"]
-
-
-@router.get("")
-def search_news():
-    pass

@@ -23,20 +23,24 @@ $ git clone https://github.com/BarnaTB/news-aggregator.git
 $ cd news-aggregator
 
 # add environment variables
-$ touch .env
+$ virtualenv venv
+
+# activate the virtual environment
+$ source venv/bin/activate
+
+$ pip install -r requirements.txt
 ```
 
 Copy the values in the `.env_example` file to the `.env`, carefully following the instructions therein, then follow the instructions that follow here.
 
 ```shell
-# build the project
-$ make build
+$ source .env
 
 # run the project
-$ make up
+$ uvicorn main.app:app --reload   
 ```
 
-If you want to add your own API as explained by the .env_example, ensure that the key holding the list of your articles is at the top level of your API's json response.
+If you want to add your own API as explained by the `.env_example`, ensure that the key holding the list of your articles is at the top level of your API's json response.
 
 The project should be ready to run so now you can check out the [documentation here](https://locahost:8000/docs/).
 
@@ -46,7 +50,7 @@ Run the tests by running `pytest` in your terminal.
 
 ## Deployment
 
-The application is running solely on localhost but a frontend is being worked on in addition with CI/CD.
+The application is running solely on localhost but a frontend is being worked on in addition with CI/CD. The dockerization process is still on going though
 
 ## Acknowledgements
 

@@ -3,4 +3,4 @@ build:
 up:
 	docker-compose up
 test:
-	docker-compose run pytest
+	docker run pytest
